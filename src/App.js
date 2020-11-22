@@ -6,7 +6,7 @@ class App extends Component {
     return (
       <div>
         <Layout>
-    
+          <p>Hello WORLD!</p>
         </Layout>
       </div>
     );
