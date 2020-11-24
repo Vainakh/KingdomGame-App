@@ -5,12 +5,12 @@ import Kingdom from '../../components/Kingdom/Kingdom';
 class KingdomBuilder extends Component {
   state = {
     levels: {
-      // defence: 1,
-      // science: 1,
-      construction: 1,
-      social: 1,
-      transportation: 1,
-      health: 1
+      defence: 0,
+      science: 0,
+      construction: 0,
+      social: 0,
+      transportation: 0,
+      health: 0
     }
   }
   render () {

@@ -7,13 +7,17 @@ const kingdom = (props) => {
     return [...Array(props.levels[levelKey])].map((_, i) => {
       return <KingdomDepartment key={levelKey + i} type={levelKey}/>
     });
-  });
-  console.log(transformedLevels)
+  }).reduce((array, el) => {
+    return array.concat(el);
+  }, []);
+  if (transformedLevels.length === 0) {
+    transformedLevels = <p>Please, start adding design elements to canvas!</p>
+  }
   return (
     <div className={"Kingdom"}>
-      <KingdomDepartment type="defence"/>
+      {/* <KingdomDepartment type="defence"/> */}
       {transformedLevels}
-      <KingdomDepartment type="science"/>
+      {/* <KingdomDepartment type="science"/> */}
     </div>
   );
 };

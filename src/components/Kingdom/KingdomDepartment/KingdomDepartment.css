@@ -106,7 +106,7 @@
   width: 50%;
   height: 10%;
   margin: 2% auto;
-  background: linear-gradient(#f0ec04, #f30303);
+  background: linear-gradient(#f00c04, #f30303);
   border-radius: 3px;
   transform: rotate(110deg);
 }
