@@ -20,8 +20,14 @@ class KingdomDepartment extends Component {
       case ("construction"):
         level = <div className={"Construction"}></div>;
         break;
-      case ("social-services"):
-        level = <div className={"Social-Services"}></div>;
+      case ("social"):
+        level = <div className={"Social"}></div>;
+        break;
+      case ("transportation"):
+        level = <div className={"Transportation"}></div>;
+        break;
+      case ("health"):
+        level = <div className={"Health"}></div>;
         break;
       default:
         level = null;

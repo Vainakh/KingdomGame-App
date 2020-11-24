@@ -8,7 +8,7 @@ const kingdom = (props) => {
       return <KingdomDepartment key={levelKey + i} type={levelKey}/>
     });
   });
-
+  console.log(transformedLevels)
   return (
     <div className={"Kingdom"}>
       <KingdomDepartment type="defence"/>

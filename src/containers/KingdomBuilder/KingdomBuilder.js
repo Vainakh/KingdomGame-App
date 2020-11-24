@@ -8,7 +8,9 @@ class KingdomBuilder extends Component {
       // defence: 1,
       // science: 1,
       construction: 1,
-      socialServices: 1
+      social: 1,
+      transportation: 1,
+      health: 1
     }
   }
   render () {
