@@ -1,14 +1,19 @@
 import React from 'react';
-import KingdomDepartments from './KingdomDepartments/KingdomDepartments';
+import KingdomDepartment from './KingdomDepartment/KingdomDepartment';
 import './Kingdom.css';
 
 const kingdom = (props) => {
+  let transformedLevels = Object.keys(props.levels).map(levelKey => {
+    return [...Array(props.levels[levelKey])].map((_, i) => {
+      return <KingdomDepartment key={levelKey + i} type={levelKey}/>
+    });
+  });
+
   return (
-    <div className="Kingdom">
-      <KingdomDepartments type="Defence"/>
-      <KingdomDepartments type="Science"/>
-      <KingdomDepartments type="Construction"/>
-      <KingdomDepartments type="Social-Services"/>
+    <div className={"Kingdom"}>
+      <KingdomDepartment type="defence"/>
+      {transformedLevels}
+      <KingdomDepartment type="science"/>
     </div>
   );
 };

@@ -2,11 +2,19 @@ import React, {Component} from 'react';
 import Aux from '../../hoc/Aux';
 import Kingdom from '../../components/Kingdom/Kingdom';
 
-class BurgerBuilder extends Component {
+class KingdomBuilder extends Component {
+  state = {
+    levels: {
+      // defence: 1,
+      // science: 1,
+      construction: 1,
+      socialServices: 1
+    }
+  }
   render () {
     return (
       <Aux>
-        <Kingdom/>
+        <Kingdom levels={this.state.levels}/>
         <div>Build Controls</div>
       </Aux>
     );
@@ -14,4 +22,4 @@ class BurgerBuilder extends Component {
 }
 
 
-export default BurgerBuilder;
+export default KingdomBuilder;
