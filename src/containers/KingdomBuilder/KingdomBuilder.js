@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Aux from '../../hoc/Aux';
 import Kingdom from '../../components/Kingdom/Kingdom';
+import BuildControls from '../../components/Kingdom/BuildControls/BuildControls';
 
 class KingdomBuilder extends Component {
   state = {
@@ -17,7 +18,7 @@ class KingdomBuilder extends Component {
     return (
       <Aux>
         <Kingdom levels={this.state.levels}/>
-        <div>Build Controls</div>
+        <BuildControls/>
       </Aux>
     );
   }
