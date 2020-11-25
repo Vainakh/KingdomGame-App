@@ -18,6 +18,8 @@ const buildControls = (props) => (
           key={ctrl.label} 
           label={ctrl.label}
           added={() => props.levelsAdded(ctrl.type)}
+          removed={() => props.levelsRemoved(ctrl.type)}
+          disabled={props.disabled[ctrl.type]}
         />
     ))}
   </div>

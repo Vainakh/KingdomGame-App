@@ -38,11 +38,36 @@ class KingdomBuilder extends Component {
     this.setState( {totalCost: newCost, levels: updatedLevels})
   }
 
+  removeLevelHandler = (type) => {
+    const oldCount = this.state.levels[type];
+    if (oldCount <= 0) return;
+    const updatedCount = oldCount - 1;
+    const updatedLevels = {
+      ...this.state.levels
+    }
+    updatedLevels[type] = updatedCount;
+    const costSubstruction = LEVEL_COSTS[type];
+    const oldCost = this.state.totalCost;
+    const newCost = oldCost + costSubstruction;
+    this.setState({totalCost: newCost, levels: updatedLevels})
+  }
+
   render () {
+
+    const disableInfo = {
+      ...this.state.levels
+    }
+    for (let key in disableInfo) {
+      disableInfo[key] = disableInfo[key] <= 0;
+    }
     return (
       <Aux>
         <Kingdom levels={this.state.levels}/>
-        <BuildControls levelsAdded={this.addLevelHandler}/>
+        <BuildControls 
+            levelsAdded={this.addLevelHandler} 
+            levelsRemoved={this.removeLevelHandler}
+            disabled={disableInfo}
+            />
       </Aux>
     );
   }
