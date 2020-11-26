@@ -67,6 +67,7 @@ class KingdomBuilder extends Component {
             levelsAdded={this.addLevelHandler} 
             levelsRemoved={this.removeLevelHandler}
             disabled={disableInfo}
+            costs={this.state.totalCost}
             />
       </Aux>
     );
