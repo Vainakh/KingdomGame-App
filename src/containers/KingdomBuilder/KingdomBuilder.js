@@ -22,9 +22,18 @@ class KingdomBuilder extends Component {
       transportation: 0,
       health: 0
     },
-    totalCost: 0
+    totalCost: 0,
+    purchasable: false
   }
 
+  updatePurchaseState = (levels) => {
+    const sum = Object.keys(levels).map((levelKey) => {
+      return levels[levelKey];
+    }).reduce((sum, el) => {
+      return sum + el;
+    }, 0);
+    this.setState({purchasable: sum > 0})
+  }
   addLevelHandler = (type) => {
     const oldCount = this.state.levels[type];
     const updatedCount = oldCount + 1;
@@ -35,7 +44,8 @@ class KingdomBuilder extends Component {
     const costAddition = LEVEL_COSTS[type];
     const oldCosts = this.state.totalCost;
     const newCost = oldCosts + costAddition;
-    this.setState( {totalCost: newCost, levels: updatedLevels})
+    this.setState( {totalCost: newCost, levels: updatedLevels});
+    this.updatePurchaseState(updatedLevels)
   }
 
   removeLevelHandler = (type) => {
@@ -48,17 +58,18 @@ class KingdomBuilder extends Component {
     updatedLevels[type] = updatedCount;
     const costSubstruction = LEVEL_COSTS[type];
     const oldCost = this.state.totalCost;
-    const newCost = oldCost + costSubstruction;
+    const newCost = oldCost - costSubstruction;
     this.setState({totalCost: newCost, levels: updatedLevels})
+    this.updatePurchaseState(updatedLevels)
   }
 
   render () {
 
-    const disableInfo = {
+    const disabledInfo = {
       ...this.state.levels
     }
-    for (let key in disableInfo) {
-      disableInfo[key] = disableInfo[key] <= 0;
+    for (let key in disabledInfo) {
+      disabledInfo[key] = disabledInfo[key] <= 0;
     }
     return (
       <Aux>
@@ -66,7 +77,8 @@ class KingdomBuilder extends Component {
         <BuildControls 
             levelsAdded={this.addLevelHandler} 
             levelsRemoved={this.removeLevelHandler}
-            disabled={disableInfo}
+            disabled={disabledInfo}
+            purchasable={this.state.purchasable}
             costs={this.state.totalCost}
             />
       </Aux>
