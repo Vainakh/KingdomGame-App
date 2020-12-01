@@ -27,9 +27,9 @@ class KingdomBuilder extends Component {
       health: 0
     },
     totalCost: 0,
-    purchasable: false
+    purchasable: false,
+    purchasing: false
   }
-
   updatePurchaseState = (levels) => {
     const sum = Object.keys(levels).map((levelKey) => {
       return levels[levelKey];
@@ -66,9 +66,10 @@ class KingdomBuilder extends Component {
     this.setState({totalCost: newCost, levels: updatedLevels})
     this.updatePurchaseState(updatedLevels)
   }
-
+  purchaseHandler = () => {
+    this.setState({purchasing: true})
+  };
   render () {
-
     const disabledInfo = {
       ...this.state.levels
     }
@@ -77,7 +78,7 @@ class KingdomBuilder extends Component {
     }
     return (
       <Aux>
-        <Modal>
+        <Modal show={this.state.purchasing}>
           <OrderSummary levels={this.state.levels}/>
         </Modal>
         <Kingdom levels={this.state.levels}/>
@@ -86,12 +87,12 @@ class KingdomBuilder extends Component {
             levelsRemoved={this.removeLevelHandler}
             disabled={disabledInfo}
             purchasable={this.state.purchasable}
+            ordered={this.purchaseHandler}
             costs={this.state.totalCost}
             />
       </Aux>
     );
   }
 }
-
 
 export default KingdomBuilder;
