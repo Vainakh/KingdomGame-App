@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import Aux from '../../hoc/Aux';
 import Kingdom from '../../components/Kingdom/Kingdom';
 import BuildControls from '../../components/Kingdom/BuildControls/BuildControls';
+import Modal from '../../components/Kingdom/UI/Modal/Modal';
+import OrderSummary from '../../components/Kingdom/OrderSummary/OrderSummary';
+
+
 
 const LEVEL_COSTS = {
   defence: 1.5,
@@ -73,6 +77,9 @@ class KingdomBuilder extends Component {
     }
     return (
       <Aux>
+        <Modal>
+          <OrderSummary levels={this.state.levels}/>
+        </Modal>
         <Kingdom levels={this.state.levels}/>
         <BuildControls 
             levelsAdded={this.addLevelHandler} 
