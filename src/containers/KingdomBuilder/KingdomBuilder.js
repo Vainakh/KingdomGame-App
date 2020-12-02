@@ -72,6 +72,9 @@ class KingdomBuilder extends Component {
   purchaseCancelHandler = () => {
     this.setState({purchasing: false, totalCost: 0})
   };
+  purchaseContinueHandler = () => {
+    alert("Continue!")
+  }
   render () {
     const disabledInfo = {
       ...this.state.levels
@@ -82,7 +85,11 @@ class KingdomBuilder extends Component {
     return (
       <Aux>
         <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-          <OrderSummary levels={this.state.levels}/>
+          <OrderSummary 
+            levels={this.state.levels}
+            purchaseCancelled={this.purchaseCancelHandler}
+            purchaseContinued={this.purchaseContinueHandler}
+          />
         </Modal>
         <Kingdom levels={this.state.levels}/>
         <BuildControls 

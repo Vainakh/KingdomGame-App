@@ -1,6 +1,7 @@
 import React from 'react';
 import Aux from '../../../hoc/Aux';
-
+import Button from '../UI/Button/Button';
+// import './OrderSummary.css';
 
 const orderSummary = (props) => {
   const levelsSummary = Object.keys(props.levels).map(levelKey => {
@@ -19,6 +20,8 @@ const orderSummary = (props) => {
         {levelsSummary}
       </ul>
       <p>Continue to checkout?</p>
+      <Button btnColor={"Danger"} clicked={props.purchaseCancelled}>CANCEL</Button>
+      <Button btnColor={"Success"} clicked={props.purchaseContinued}>CONTINUE</Button>
     </Aux>
   )
 };
