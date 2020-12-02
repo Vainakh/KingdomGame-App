@@ -89,6 +89,7 @@ class KingdomBuilder extends Component {
             levels={this.state.levels}
             purchaseCancelled={this.purchaseCancelHandler}
             purchaseContinued={this.purchaseContinueHandler}
+            cost={this.state.totalCost}
           />
         </Modal>
         <Kingdom levels={this.state.levels}/>
