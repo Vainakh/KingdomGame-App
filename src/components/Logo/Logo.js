@@ -3,7 +3,7 @@ import './Logo.css';
 import kingdomLogo from '../../assets/images/logo.png';
 
 const logo = (props) => (
-  <div className="Logo">
+  <div className="Logo" style={{height: props.height}}>
     <img src={kingdomLogo} alt="MyKingdom"></img>
   </div>
 )
