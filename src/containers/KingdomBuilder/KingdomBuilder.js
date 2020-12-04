@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import Aux from '../../hoc/Aux';
+import Aux from '../../hoc/Aux/Aux';
 import Kingdom from '../../components/Kingdom/Kingdom';
 import BuildControls from '../../components/Kingdom/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Kingdom/OrderSummary/OrderSummary';
 import axios from '../../axios-orders';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 
 
@@ -91,7 +92,7 @@ class KingdomBuilder extends Component {
       },
       deliveryMethod: "Fastest"
     }
-    axios.post("/orders.json", order)
+    axios.post("/orders", order)
          .then(response => {
           this.setState({loading: false, purchasing: false});
           console.log(response);
@@ -119,7 +120,8 @@ class KingdomBuilder extends Component {
     }
     return (
       <Aux>
-        <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+        <Modal 
+            show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
           {orderSummary}
         </Modal>
         <Kingdom levels={this.state.levels}/>
@@ -136,4 +138,4 @@ class KingdomBuilder extends Component {
   }
 }
 
-export default KingdomBuilder;
+export default withErrorHandler(KingdomBuilder, axios);;
