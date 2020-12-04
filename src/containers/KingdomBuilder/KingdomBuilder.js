@@ -4,6 +4,7 @@ import Kingdom from '../../components/Kingdom/Kingdom';
 import BuildControls from '../../components/Kingdom/BuildControls/BuildControls';
 import Modal from '../../components/Kingdom/UI/Modal/Modal';
 import OrderSummary from '../../components/Kingdom/OrderSummary/OrderSummary';
+import axios from '../../axios-orders';
 
 
 
@@ -73,7 +74,27 @@ class KingdomBuilder extends Component {
     this.setState({purchasing: false, totalCost: 0})
   };
   purchaseContinueHandler = () => {
-    alert("Continue!")
+    const order =  {
+      levels: this.state.levels,
+      costs: this.state.totalCost,
+      customer: {
+        name: "Adlan",
+        address: {
+          street: "California Street",
+          zipCode: "94108",
+          country: "USA"
+        },
+        email: "test@test.com"
+      },
+      deliveryMethod: "Fastest"
+    }
+    axios.post("/orders.json", order)
+         .then(response => {
+           console.log(response);
+         })
+         .catch(error => {
+           console.log(error);
+         })
   }
   render () {
     const disabledInfo = {
