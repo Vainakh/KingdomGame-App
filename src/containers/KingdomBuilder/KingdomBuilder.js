@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import Aux from '../../hoc/Aux';
 import Kingdom from '../../components/Kingdom/Kingdom';
 import BuildControls from '../../components/Kingdom/BuildControls/BuildControls';
-import Modal from '../../components/Kingdom/UI/Modal/Modal';
+import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Kingdom/OrderSummary/OrderSummary';
 import axios from '../../axios-orders';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 
 
@@ -29,7 +30,8 @@ class KingdomBuilder extends Component {
     },
     totalCost: 0,
     purchasable: false,
-    purchasing: false
+    purchasing: false,
+    loading: false
   }
   updatePurchaseState = (levels) => {
     const sum = Object.keys(levels).map((levelKey) => {
@@ -74,6 +76,7 @@ class KingdomBuilder extends Component {
     this.setState({purchasing: false, totalCost: 0})
   };
   purchaseContinueHandler = () => {
+    this.setState({loading: true})
     const order =  {
       levels: this.state.levels,
       costs: this.state.totalCost,
@@ -90,10 +93,11 @@ class KingdomBuilder extends Component {
     }
     axios.post("/orders.json", order)
          .then(response => {
-           console.log(response);
+          this.setState({loading: false, purchasing: false});
+          console.log(response);
          })
          .catch(error => {
-           console.log(error);
+          this.setState({loading: false, purchasing: false});
          })
   }
   render () {
@@ -103,15 +107,20 @@ class KingdomBuilder extends Component {
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
+    let orderSummary = 
+      <OrderSummary 
+        levels={this.state.levels}
+        purchaseCancelled={this.purchaseCancelHandler}
+        purchaseContinued={this.purchaseContinueHandler}
+        cost={this.state.totalCost}
+      />
+    if (this.state.loading) {
+      orderSummary = <Spinner/>
+    }
     return (
       <Aux>
         <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-          <OrderSummary 
-            levels={this.state.levels}
-            purchaseCancelled={this.purchaseCancelHandler}
-            purchaseContinued={this.purchaseContinueHandler}
-            cost={this.state.totalCost}
-          />
+          {orderSummary}
         </Modal>
         <Kingdom levels={this.state.levels}/>
         <BuildControls 
